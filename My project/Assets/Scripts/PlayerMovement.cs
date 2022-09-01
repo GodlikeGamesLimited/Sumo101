@@ -13,17 +13,38 @@ public class PlayerMovement : NetworkBehaviour
     {
     }
 
-    public override void OnNetworkSpawn()
-    {
-        if(!IsOwner) {Destroy(this);}
-    }
-
     // Update is called once per frame
     void Update()
     {
-        float v = Input.GetAxisRaw("Vertical");
-        float h = Input.GetAxisRaw("Horizontal");
-        float j = Input.GetAxisRaw("Jump");
+        if(!IsOwner) return;
+
+        float[] inputs = new float[3]; 
+        inputs[0] = Input.GetAxisRaw("Vertical");;
+        inputs[1] = Input.GetAxisRaw("Horizontal");
+        inputs[2] = Input.GetAxisRaw("Jump");
+
+        RequestMoveServerRpc(inputs);
+        
+        Move(inputs);
+    }
+
+    [ServerRpc]
+    private void RequestMoveServerRpc(float[] moveInputs)
+    {
+        MoveClientRpc(moveInputs);
+    }
+
+    [ClientRpc]
+    private void MoveClientRpc(float[] moveInputs)
+    {
+        Move(moveInputs);
+    }
+
+    private void Move(float[] moveInputs)
+    {
+        float v = moveInputs[0];
+        float h = moveInputs[1];
+        float j = moveInputs[2];
 
         Vector3 currV = this.GetComponent<Rigidbody>().velocity;
         int vCap = 8;
@@ -62,20 +83,8 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
 
-
-        //same for jump, but only allow jump if player is touching floor
-        /*
-        void OnCollisionEnter(Collision c)
-        {
-            Debug.Log("collision detected");
-            if(c.gameObject.CompareTag("floor")) {canJump = true;}
-        }
-
-        void OnCollisionExit(Collision c)
-        {
-            if(c.gameObject.CompareTag("floor")) {canJump = false;}
-        }*/
         canJump = (this.transform.position.y - floor.transform.position.y == (float)2.65);
+
         if(j != 0)
         {
             Debug.Log("Jump key detected");
