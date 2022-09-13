@@ -808,7 +808,7 @@ MonoBehaviour:
   ConnectionData:
     Address: 127.0.0.1
     Port: 7777
-    ServerListenAddress: 
+    ServerListenAddress: 0.0.0.0
   DebugSimulator:
     PacketDelayMS: 0
     PacketJitterMS: 0
@@ -1160,10 +1160,6 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 106414356493479267, guid: 8fbda0145606a4f4fb55d759083535eb, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 106414356493479267, guid: 8fbda0145606a4f4fb55d759083535eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1203,10 +1199,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1172019021752233621, guid: 8fbda0145606a4f4fb55d759083535eb, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 4f5bb9a4c520f07488807c11d5b98d31, type: 2}
     - target: {fileID: 7600879730880479550, guid: 8fbda0145606a4f4fb55d759083535eb, type: 3}
       propertyPath: m_Name
       value: Floor

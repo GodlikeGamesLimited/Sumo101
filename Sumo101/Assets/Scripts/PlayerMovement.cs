@@ -83,13 +83,19 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
 
-        canJump = (this.transform.position.y - floor.transform.position.y == (float)2.65);
+        
+        float floorHeight = floor.transform.position.y;
+        float playerHeight = this.transform.position.y;
+        float heightDiff = playerHeight - floorHeight;
+        
+        canJump = (heightDiff == (float)2.6);
 
         if(j != 0)
         {
-            Debug.Log("Jump key detected");
+            //Debug.Log("Jump key detected, canJump = " + canJump + " " + heightDiff + " floorHeight = " + floorHeight + " playerHeight = " + playerHeight);
             if(canJump)
             {
+                Debug.Log("JUMPING");
                 this.GetComponent<Rigidbody>().AddForce(new Vector3(0,(float)(j/2),0), ForceMode.VelocityChange);
             }
         }
