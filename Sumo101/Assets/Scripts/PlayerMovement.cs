@@ -95,7 +95,7 @@ public class PlayerMovement : NetworkBehaviour
             //Debug.Log("Jump key detected, canJump = " + canJump + " " + heightDiff + " floorHeight = " + floorHeight + " playerHeight = " + playerHeight);
             if(canJump)
             {
-                Debug.Log("JUMPING");
+                //Debug.Log("JUMPING");
                 this.GetComponent<Rigidbody>().AddForce(new Vector3(0,(float)(j/2),0), ForceMode.VelocityChange);
             }
         }

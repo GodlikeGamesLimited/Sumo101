@@ -18,9 +18,10 @@ GameObject:
   - component: {fileID: -4296073542969645861}
   - component: {fileID: 6493958677652450804}
   - component: {fileID: 5541439402105179870}
+  - component: {fileID: 1989772674266817082}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,3 +198,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathFireworks: {fileID: 2086748350045920883, guid: 3c712491a3bb2794bb8b8bc2c023e181, type: 3}
+--- !u!114 &1989772674266817082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3933413500567861879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd406bfe4c8438e458f62a996797950d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
