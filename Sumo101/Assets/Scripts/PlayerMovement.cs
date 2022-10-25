@@ -6,11 +6,31 @@ using Unity.Netcode;
 public class PlayerMovement : NetworkBehaviour
 {
     public GameObject floor;
-    private bool canJump;
-
-    // Start is called before the first frame update
-    void Start()
+    private bool canJump,speedOn;
+    private float timeCount = 0;
+    public float speedIncrement = (float)0.2,secondsToPowerUp = 3f;
+    
+    //make power up last for a certain time period
+    //https://answers.unity.com/questions/504843/c-make-something-happen-for-x-amount-of-seconds.html is an alternative method. Used FixedUpdate which is kind of ugly but works.
+    public void speedPowerUp()
     {
+        speedOn = true;
+        speedIncrement = 2.0f;
+    }
+
+    private void FixedUpdate() 
+    {
+        if(speedOn)
+        {
+            timeCount += Time.deltaTime;
+   
+            if(timeCount >= secondsToPowerUp)
+            {
+                timeCount = 0;
+                speedOn = false;
+                speedIncrement = 0.2f;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -56,13 +76,13 @@ public class PlayerMovement : NetworkBehaviour
             if(v > 0) 
             {
                 if(currV.z < vCap)
-                    this.GetComponent<Rigidbody>().AddForce(new Vector3(0,0,(float)0.1), ForceMode.VelocityChange);
+                    this.GetComponent<Rigidbody>().AddForce(new Vector3(0,0,speedIncrement), ForceMode.VelocityChange);
             }
 
             else 
             {
                 if(currV.z > -vCap)
-                    this.GetComponent<Rigidbody>().AddForce(new Vector3(0,0,(float)(-0.1)), ForceMode.VelocityChange);
+                    this.GetComponent<Rigidbody>().AddForce(new Vector3(0,0,-speedIncrement), ForceMode.VelocityChange);
             }
         }
 
@@ -73,13 +93,13 @@ public class PlayerMovement : NetworkBehaviour
             if(h > 0) 
             {
                 if(currV.x < vCap)
-                    this.GetComponent<Rigidbody>().AddForce(new Vector3((float)0.1,0,0), ForceMode.VelocityChange);
+                    this.GetComponent<Rigidbody>().AddForce(new Vector3(speedIncrement,0,0), ForceMode.VelocityChange);
             }
 
             else 
             {
                 if(currV.x > -vCap)
-                    this.GetComponent<Rigidbody>().AddForce(new Vector3((float)(-0.1),0,0), ForceMode.VelocityChange);
+                    this.GetComponent<Rigidbody>().AddForce(new Vector3(-speedIncrement,0,0), ForceMode.VelocityChange);
             }
         }
 

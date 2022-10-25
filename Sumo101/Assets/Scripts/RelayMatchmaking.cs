@@ -26,6 +26,7 @@ public class RelayMatchmaking : NetworkBehaviour
     const int maxPlayers = 8;
 
     private UnityTransport transport;
+    private PowerUpSpawner powerUpSpawner;
 
     public Button joinButton,createButton;
 
@@ -74,6 +75,10 @@ public class RelayMatchmaking : NetworkBehaviour
         joinCodeDisplay.gameObject.SetActive(true);
 
         NetworkManager.Singleton.StartHost();
+
+        //activate scripts that depend on host.
+        powerUpSpawner = FindObjectOfType<PowerUpSpawner>();
+        powerUpSpawner.enabled = true;
     }
 
     public async void JoinGame()

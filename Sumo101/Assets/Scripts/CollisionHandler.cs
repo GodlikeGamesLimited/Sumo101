@@ -11,11 +11,11 @@ public class CollisionHandler : MonoBehaviour
 
     private void FixedUpdate() 
     {
-        if(addingForce) 
+        if(addingForce)
         {
             timeCount += Time.deltaTime;
    
-            if(timeCount < secondsToApplyForce) 
+            if(timeCount < secondsToApplyForce)
             {
                 GetComponent<Rigidbody>().AddForce(force * 100);
             }
